@@ -85,6 +85,17 @@ export function Register() {
           autoComplete: 'name',
           required: true,
         },
+        {
+          name: 'mobile',
+          label: 'Mobile number',
+          type: 'tel',
+          placeholder: '9876543210',
+          autoComplete: 'tel',
+          inputMode: 'numeric',
+          pattern: '[6-9][0-9]{9}',
+          title: '10-digit Indian mobile number',
+          required: true,
+        },
         email,
         { ...password, autoComplete: 'new-password' },
       ]}
