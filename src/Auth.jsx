@@ -1,15 +1,19 @@
 import { Link, useNavigate } from 'react-router-dom'
 import './Auth.css'
 
-// ponytail: no backend — submit just logs and returns to the login page.
-// Swap the handler body for a fetch() when the API exists.
+// ponytail: fake auth — no backend, so the form data itself is the "session".
+// Swap the body for a fetch() + real token when the API exists.
 function AuthForm({ title, subtitle, action, altText, altLink, altTo, fields }) {
   const navigate = useNavigate()
 
   function handleSubmit(e) {
     e.preventDefault()
-    console.log(title, Object.fromEntries(new FormData(e.target)))
-    navigate('/')
+    // password intentionally dropped — never store it client-side
+    const { password: _password, ...user } = Object.fromEntries(
+      new FormData(e.target),
+    )
+    sessionStorage.setItem('user', JSON.stringify(user))
+    navigate('/dashboard')
   }
 
   return (
